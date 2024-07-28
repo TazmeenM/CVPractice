@@ -1,4 +1,3 @@
-#This version doesn't work; some errors still need to be fixed
 import cv2
 import numpy
 
@@ -26,6 +25,48 @@ def fraction_of_frame(number_of_pixels):
 def what_to_do_function():
     what_to_do = 0
 
+def colour_balance(red_counter, yellow_counter, blue_counter):
+    if (red_counter == yellow_counter == blue_counter):
+        print("all")
+        return "all"
+    elif (red_counter > yellow_counter):
+        if (red_counter > blue_counter):
+            print("red")
+            #cv2.imshow("Red", red_mask)
+            return "red"
+        elif (blue_counter > red_counter):
+            print("blue")
+            #cv2.imshow("Blue", blue_mask)
+            return "blue"
+        else:
+            print("red and blue")
+            #cv2.imshow("Red", red_mask)
+            #cv2.imshow("Blue", blue_mask)
+            return "red and blue"
+    elif (yellow_counter > red_counter):
+        if (yellow_counter > blue_counter):
+            print("yellow")
+            #cv2.imshow("Yellow", yellow_mask)
+            return "yellow"
+        elif (blue_counter > yellow_counter):
+            print("blue")
+            #cv2.imshow("Blue", blue_mask)
+            return "blue"
+        else:
+            print("yellow and blue")
+            #cv2.imshow("Yellow", yellow_mask)
+            #cv2.imshow("Blue", blue_mask)
+            return "yellow and blue"
+    else:
+        print("blue")
+        return "blue"
+    
+    if (fraction_of_frame(red_counter) > 0.001):
+        print("Too much red")
+    else:
+        print("Not enough red")
+
+def what_to_do_function(what_to_do):
     lower_colour_boundary = numpy.array([0, 100, 100])
     upper_colour_boundary = numpy.array([43, 255, 255])
 
@@ -68,38 +109,12 @@ def what_to_do_function():
         for i in blue_mask:
             if (blue_mask[i].any()):
                 blue_counter += 1
-
-        if (red_counter == yellow_counter == blue_counter):
-            print("all")
-            break
-        elif (red_counter > yellow_counter):
-            if (red_counter > blue_counter):
-                print("red")
-                cv2.imshow("Red", red_mask)
-            elif (blue_counter > red_counter):
-                print("blue")
-                cv2.imshow("Blue", blue_mask)
-            else:
-                print("red and blue")
-                cv2.imshow("Red", red_mask)
-                cv2.imshow("Blue", blue_mask)
-        elif (yellow_counter > red_counter):
-            if (yellow_counter > blue_counter):
-                print("yellow")
-                cv2.imshow("Yellow", yellow_mask)
-            elif (blue_counter > yellow_counter):
-                print("blue")
-                cv2.imshow("Blue", blue_mask)
-            else:
-                print("yellow and blue")
-                cv2.imshow("Yellow", yellow_mask)
-                cv2.imshow("Blue", blue_mask)
-        else:
-            print("blue")
+        
+        return colour_balance(red_counter, blue_counter, yellow_counter)
         
         if (fraction_of_frame(red_counter) > 0.001):
             print("Too much red")
-            break
+            #break
         else:
             print("Not enough red")
 
@@ -114,8 +129,9 @@ def what_to_do_function():
 
         if (k == 27):
             break
-        '''
+        
         cv2.imshow("Window", mask)
+        '''
         threshold = cv2.threshold(mask, 100, 255, 0)
         print("before")
         contours = cv2.findContours(threshold, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -123,6 +139,3 @@ def what_to_do_function():
         contours_drawing = cv2.drawContours(mask, contours, -1, (10, 10, 10), 3)
         cv2.imshow("Contours", contours_drawing)
         '''
-
-what_to_do_function()
-    

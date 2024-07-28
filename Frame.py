@@ -22,7 +22,7 @@ def gameLoop():
     while(k != 27):
         screen.blit(background, (0, 0))
         pygame.display.update()
-        cvPractice.what_to_do_function()
+        colour = cvPractice.what_to_do_function(0)
     
 pygame.display.set_caption("Pygame")
 
