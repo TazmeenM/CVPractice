@@ -29,6 +29,11 @@ def colour_balance(red_counter, yellow_counter, blue_counter):
     if (red_counter == yellow_counter == blue_counter):
         print("all")
         return "all"
+    elif (red_counter == yellow_counter):
+        print("red and yellow")
+        #cv2.imshow("Red", red_mask)
+        #cv2.imshow("Yellow", yellow_mask)
+        return "red and yellow"
     elif (red_counter > yellow_counter):
         if (red_counter > blue_counter):
             print("red")

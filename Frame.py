@@ -16,13 +16,15 @@ def loadingImages(image):
     image = pygame.image.load(image)
     return image
 
-background = loadingImages("Desktop\Tazmeen\CVPractice\\blueBackground.png")
+def set_background(colour):
+    background = loadingImages("Desktop\Tazmeen\CVPractice\\" + colour + "Background.png")
+    return background
 
 def gameLoop():
     while(k != 27):
-        screen.blit(background, (0, 0))
         pygame.display.update()
         colour = cvPractice.what_to_do_function(0)
+        screen.blit(set_background(colour), (0, 0))
     
 pygame.display.set_caption("Pygame")
 
