@@ -3,19 +3,20 @@ import numpy
 
 what_to_do = 0
 
-lower_colour_boundary = numpy.array([0, 100, 100])
-upper_colour_boundary = numpy.array([43, 255, 255])
+lower_colour_boundary = numpy.array([37, 100, 100])
+upper_colour_boundary = numpy.array([63, 100, 100])
 
 lower_red = numpy.array([0, 100, 100])
-upper_red = numpy.array([43, 255, 255])
+upper_red = numpy.array([16, 255, 255])
 
-lower_yellow = numpy.array([43, 100, 100])
-upper_yellow = numpy.array([86, 255, 255])
+lower_yellow = numpy.array([51, 100, 100])
+upper_yellow = numpy.array([72, 255, 255])
 
-lower_blue = numpy.array([86, 100, 100])
-upper_blue = numpy.array([129, 255, 255])
+lower_blue = numpy.array([189, 100, 100])
+upper_blue = numpy.array([264, 255, 255])
 
 cap = cv2.VideoCapture(0)
+_, frame = cap.read()
 
 def fraction_of_frame(number_of_pixels):
     resolution = frame.shape
