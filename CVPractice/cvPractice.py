@@ -27,7 +27,9 @@ def what_to_do_function():
     what_to_do = 0
 
 def colour_balance(red_counter, yellow_counter, blue_counter):
-    if (red_counter == yellow_counter == blue_counter):
+    if (red_counter == yellow_counter == blue_counter == 0):
+        print("black")
+    elif (red_counter == yellow_counter == blue_counter != 0):
         print("all")
         return "all"
     elif (red_counter == yellow_counter):
@@ -39,7 +41,7 @@ def colour_balance(red_counter, yellow_counter, blue_counter):
         if (red_counter > blue_counter):
             print("red")
             #cv2.imshow("Red", red_mask)
-            return "red"
+            return "blue"
         elif (blue_counter > red_counter):
             print("blue")
             #cv2.imshow("Blue", blue_mask)
@@ -67,10 +69,20 @@ def colour_balance(red_counter, yellow_counter, blue_counter):
         print("blue")
         return "blue"
     
-    if (fraction_of_frame(red_counter) > 0.001):
-        print("Too much red")
+    #if (fraction_of_frame(red_counter) > 0.001):
+     #   print("Too much red")
+    #else:
+     #   print("Not enough red")
+    
+def colour(b, g, r):
+    if (g < 128 and b == 0):
+        return "red"
+    elif (r < 200 and b == 0 and r <= g):
+        return "yellow"
+    elif (g < 200 and r == 0):
+        return "blue"
     else:
-        print("Not enough red")
+        return "blue"
 
 def what_to_do_function(what_to_do):
     lower_colour_boundary = numpy.array([0, 100, 100])
@@ -103,18 +115,29 @@ def what_to_do_function(what_to_do):
         if (k == 27):
             break
 
-        cv2.imshow("Window", mask)
-        for i in red_mask:
-            if (red_mask[i].any()):
-                red_counter += 1
+        #cv2.imshow("Window", mask)
+        #for i in red_mask:
+         #   if (red_mask[i].any()):
+           #     red_counter += 1
 
-        for i in yellow_mask:
-            if (yellow_mask[i].any()):
-                yellow_counter += 1
+        #for i in yellow_mask:
+         #   if (yellow_mask[i].any()):
+          #      yellow_counter += 1
         
-        for i in blue_mask:
-            if (blue_mask[i].any()):
-                blue_counter += 1
+        #for i in blue_mask:
+         #   if (blue_mask[i].any()):
+          #      blue_counter += 1
+        for i in range(480):
+            for j in range(640):
+                if (colour(frame[i, j][0], frame[i, j][1], frame[i, j][2]) == "red"):
+                    red_counter += 1
+                elif (colour(frame[i, j][0], frame[i, j][1], frame[i, j][2]) == "yellow"):
+                    yellow_counter +=1
+                    print(yellow_counter)
+                elif (colour(frame[i, j][0], frame[i, j][1], frame[i, j][2]) == "blue"):
+                    blue_counter += 1
+                
+
         
         return colour_balance(red_counter, blue_counter, yellow_counter)
         
@@ -136,7 +159,7 @@ def what_to_do_function(what_to_do):
         if (k == 27):
             break
         
-        cv2.imshow("Window", mask)
+        #cv2.imshow("Window", mask)
         '''
         threshold = cv2.threshold(mask, 100, 255, 0)
         print("before")
