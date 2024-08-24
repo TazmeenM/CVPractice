@@ -27,46 +27,52 @@ def what_to_do_function():
     what_to_do = 0
 
 def colour_balance(red_counter, yellow_counter, blue_counter):
+    #print(red_counter)
+    #print(blue_counter)
+    #print(yellow_counter)
     if (red_counter == yellow_counter == blue_counter == 0):
-        print("black")
+        #print("black")
+        return "black"
     elif (red_counter == yellow_counter == blue_counter != 0):
-        print("all")
+        #print("all")
         return "all"
     elif (red_counter == yellow_counter):
-        print("red and yellow")
+        #print("red and yellow")
         #cv2.imshow("Red", red_mask)
         #cv2.imshow("Yellow", yellow_mask)
         return "red and yellow"
     elif (red_counter > yellow_counter):
         if (red_counter > blue_counter):
-            print("red")
+            #print("red")
             #cv2.imshow("Red", red_mask)
             return "blue"
         elif (blue_counter > red_counter):
-            print("blue")
+            #print("blue")
             #cv2.imshow("Blue", blue_mask)
             return "blue"
         else:
-            print("red and blue")
+            #print("red and blue")
             #cv2.imshow("Red", red_mask)
             #cv2.imshow("Blue", blue_mask)
             return "red and blue"
     elif (yellow_counter > red_counter):
         if (yellow_counter > blue_counter):
-            print("yellow")
+            #print("yellow")
+            #print(yellow_counter)
+            #print(blue_counter)
             #cv2.imshow("Yellow", yellow_mask)
             return "yellow"
         elif (blue_counter > yellow_counter):
-            print("blue")
+            #print("blue")
             #cv2.imshow("Blue", blue_mask)
             return "blue"
         else:
-            print("yellow and blue")
+            #print("yellow and blue")
             #cv2.imshow("Yellow", yellow_mask)
             #cv2.imshow("Blue", blue_mask)
             return "yellow and blue"
     else:
-        print("blue")
+        #print("blue")
         return "blue"
     
     #if (fraction_of_frame(red_counter) > 0.001):
@@ -75,14 +81,14 @@ def colour_balance(red_counter, yellow_counter, blue_counter):
      #   print("Not enough red")
     
 def colour(b, g, r):
-    if (g < 128 and b == 0):
+    if (g < 128 and b <= 100 and g < r):
         return "red"
-    elif (r < 200 and b == 0 and r <= g):
+    elif (r < 200 and b <= 100 and (r <= g + 30 or r >= g - 30)):
         return "yellow"
-    elif (g < 200 and r == 0):
+    elif (g < 200 and r <= 100 and g < b):
         return "blue"
     else:
-        return "blue"
+        return "purple"
 
 def what_to_do_function(what_to_do):
     lower_colour_boundary = numpy.array([0, 100, 100])
@@ -98,7 +104,7 @@ def what_to_do_function(what_to_do):
     upper_blue = numpy.array([129, 255, 255])
 
     cap = cv2.VideoCapture(0)
-    while (what_to_do == 0):
+    if (what_to_do == 0):
         
         _, frame = cap.read()
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
@@ -107,13 +113,13 @@ def what_to_do_function(what_to_do):
         red_counter = 0
         yellow_counter = 0
         blue_counter = 0
-        red_mask = cv2.inRange(hsv, lower_red, upper_red)
-        yellow_mask = cv2.inRange(hsv, lower_yellow, upper_yellow)
-        blue_mask = cv2.inRange(hsv, lower_blue, upper_blue)
-        k = cv2.waitKey(5)
+        #red_mask = cv2.inRange(hsv, lower_red, upper_red)
+        #yellow_mask = cv2.inRange(hsv, lower_yellow, upper_yellow)
+        #blue_mask = cv2.inRange(hsv, lower_blue, upper_blue)
+        #k = cv2.waitKey(5)
 
-        if (k == 27):
-            break
+        #if (k == 27):
+            #break
 
         #cv2.imshow("Window", mask)
         #for i in red_mask:
@@ -127,18 +133,19 @@ def what_to_do_function(what_to_do):
         #for i in blue_mask:
          #   if (blue_mask[i].any()):
           #      blue_counter += 1
+        
         for i in range(480):
             for j in range(640):
                 if (colour(frame[i, j][0], frame[i, j][1], frame[i, j][2]) == "red"):
                     red_counter += 1
+                    #print("reached red")
                 elif (colour(frame[i, j][0], frame[i, j][1], frame[i, j][2]) == "yellow"):
                     yellow_counter +=1
-                    print(yellow_counter)
+                    #print("reached yellow")
                 elif (colour(frame[i, j][0], frame[i, j][1], frame[i, j][2]) == "blue"):
                     blue_counter += 1
+                    #print("reached blue")
                 
-
-        
         return colour_balance(red_counter, blue_counter, yellow_counter)
         
         if (fraction_of_frame(red_counter) > 0.001):
@@ -148,7 +155,7 @@ def what_to_do_function(what_to_do):
             print("Not enough red")
 
 
-    while (what_to_do == 1):
+    elif (what_to_do == 1):
         _, frame = cap.read()
         lower_colour_boundary = numpy.array([0, 25, 25])
         upper_colour_boundary = numpy.array([255, 230, 230])
@@ -156,8 +163,8 @@ def what_to_do_function(what_to_do):
         mask = cv2.inRange(hsv, lower_colour_boundary, upper_colour_boundary)
         k = cv2.waitKey(5)
 
-        if (k == 27):
-            break
+        #if (k == 27):
+            #break
         
         #cv2.imshow("Window", mask)
         '''

@@ -32,9 +32,9 @@ def car_speed(colour, backgroundX):
     if (colour == "red"):
         speed = 0
     elif (colour == "yellow"):
-        speed = 10
-    else:
         speed = 20
+    else:
+        speed = 40
     if (backgroundX >= (displayX - 1000 + speed)):
         backgroundX -= speed
     else:
@@ -54,8 +54,9 @@ def gameLoop():
     while (k != 27):
         pygame.display.update()
         colour = cvPractice.what_to_do_function(0)
+        print(colour)
         backgroundX = car_speed(colour, backgroundX)
-        print(backgroundX)
+        #print(backgroundX)
         screen.blit(set_background(), (backgroundX, 0))
         screen.blit(set_car(), (34, 540))
         #time.sleep(0.1)
