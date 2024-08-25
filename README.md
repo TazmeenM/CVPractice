@@ -13,9 +13,12 @@ Download the CVPractice folder and open the Frame.py file. The program will open
 Note: For the best results, use colours that fall strictly within their categories (e.g. a shade of blue closer to the middle of its spectrum rather than turquoise).
 
 Gameplay Images:
+
 The Game Window: 
+
 ![image](https://github.com/user-attachments/assets/e6007d6c-4a10-4b6c-98a1-531b936d89b6)
 
 Gameplay:
+
 https://github.com/user-attachments/assets/781045f5-60be-4fd1-b9e1-9caf711f3d81
 
