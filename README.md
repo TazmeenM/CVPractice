@@ -18,7 +18,7 @@ The Game Window:
 
 ![image](https://github.com/user-attachments/assets/e6007d6c-4a10-4b6c-98a1-531b936d89b6)
 
-Gameplay:
+Gameplay (when the most prevalent colour is blue): 
 
 https://github.com/user-attachments/assets/781045f5-60be-4fd1-b9e1-9caf711f3d81
 
