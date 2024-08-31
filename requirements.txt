@@ -1,0 +1,5 @@
+Requirements:
+- Python 3.9.6
+- Pygame
+- A webcam/camera
+- Installation of this repo (or just the CVPractice folder in the repo)
